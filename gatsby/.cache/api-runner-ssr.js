@@ -1,4 +1,10 @@
 var plugins = [{
+      plugin: require('/Users/rohald/OneDrive/Documents/Projects/Master-Gatsby/gatsby/node_modules/gatsby-plugin-styled-components/gatsby-ssr'),
+      options: {"plugins":[]},
+    },{
+      plugin: require('/Users/rohald/OneDrive/Documents/Projects/Master-Gatsby/gatsby/node_modules/gatsby-source-sanity/gatsby-ssr'),
+      options: {"plugins":[],"projectId":"6u0vmexe","dataset":"production","watchMode":true,"token":"skRunblTZ17R0FilgwSTy9HYqrYRksNbBIZlLHSTRx6CgOqhsVYnzBIXqaLsa6Qid1jprXmbjMeC3UcSMlWPcCyC83P6HmydPq8ClQPHoXcEdx3UZpyFWJW2bAiHpAa3cI1VX690Fr7tdIYPGYLzFPyNzNjvcCZAJqmjt5xPrN7EJNnSUdxN"},
+    },{
       plugin: require('/Users/rohald/OneDrive/Documents/Projects/Master-Gatsby/gatsby/gatsby-ssr'),
       options: {"plugins":[]},
     }]
