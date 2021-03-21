@@ -89,6 +89,43 @@ async function fetchBeersAndTurnIntoNodes({
   }
 }
 
+async function turnSlicemastersIntoPages({ graphql, actions }) {
+  // 1. query all slicemasters
+  const { data } = await graphql(`
+    query {
+      slicemasters: allSanityPerson {
+        totalCount
+        nodes {
+          name
+          id
+          slug {
+            current
+          }
+        }
+      }
+    }
+  `);
+  // TODO: 2. turn each slicemaster into their own page ( TODO )
+  // 3. figure out how many pages there are based on length of slicemasters and howmany per page
+  const pageSize = parseInt(process.env.GATSBY_PAGE_SIZE);
+  const pageCount = Math.ceil(data.slicemasters.totalCount / pageSize);
+  console.log(pageCount);
+  // 4. loop from 1 to n and create pages for them
+  Array.from({ length: pageCount }).forEach((_, i) => {
+    console.log(`creating page ${i}`);
+    actions.createPage({
+      path: `/slicemasters/${i + 1}`,
+      component: path.resolve('./src/pages/slicemasters.js'),
+      // this data is passed to the template when we create it
+      context: {
+        skip: i * pageSize,
+        currentPage: i + 1,
+        pageSize,
+      },
+    });
+  });
+}
+
 export async function sourceNodes(params) {
   // fetch a list of beers and source them into our gatsby API!
   await Promise.all([fetchBeersAndTurnIntoNodes(params)]);
@@ -100,6 +137,7 @@ export async function createPages(params) {
   await Promise.all([
     turnPizzasIntoPages(params),
     turnToppingsIntoPages(params),
+    turnSlicemastersIntoPages(params),
   ]);
   // 2. toppings
   // 3. Slicemasters
