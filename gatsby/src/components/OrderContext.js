@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-// create order context
+// Create a order context
 const OrderContext = React.createContext();
 
 export function OrderProvider({ children }) {

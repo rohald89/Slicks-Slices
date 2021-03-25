@@ -1,5 +1,5 @@
-import calculatePizzaPrice from './calculatePizzaPrice';
 import formatMoney from './formatMoney';
+import calculatePizzaPrice from './calculatePizzaPrice';
 
 export default function attachNamesAndPrices(order, pizzas) {
   return order.map((item) => {
@@ -8,7 +8,7 @@ export default function attachNamesAndPrices(order, pizzas) {
       ...item,
       name: pizza.name,
       thumbnail: pizza.image.asset.fluid.src,
-      price: formatMoney(calculatePizzaPrice(pizza.price)),
+      price: formatMoney(calculatePizzaPrice(pizza.price, item.size)),
     };
   });
 }
