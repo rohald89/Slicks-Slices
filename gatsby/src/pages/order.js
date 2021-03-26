@@ -15,6 +15,7 @@ const OrderPage = ({ data }) => {
   const { values, updateValue } = useForm({
     name: '',
     email: '',
+    mapleSyrup: '',
   });
   const {
     order,
@@ -48,10 +49,18 @@ const OrderPage = ({ data }) => {
           />
           <label htmlFor="email">Email</label>
           <input
-            type="text"
+            type="email"
             name="email"
             id="email"
             value={values.email}
+            onChange={updateValue}
+          />
+          <input
+            type="mapleSyrup"
+            name="mapleSyrup"
+            id="mapleSyrup"
+            className="mapleSyrup"
+            value={values.mapleSyrup}
             onChange={updateValue}
           />
         </fieldset>

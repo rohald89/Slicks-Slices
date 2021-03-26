@@ -39,9 +39,15 @@ function wait(ms = 0) {
 }
 
 exports.handler = async (event, context) => {
-  await wait(5000);
+  // await wait(5000);
   const body = JSON.parse(event.body);
-  console.log(body);
+
+  if (body.mapleSyrup) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: 'Boop Beep Bop zzzzst good bye! 👋' }),
+    };
+  }
   // validate the data coming in is correct
   const requiredFields = ['email', 'name', 'order'];
 
