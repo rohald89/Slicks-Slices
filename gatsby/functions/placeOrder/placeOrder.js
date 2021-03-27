@@ -25,7 +25,7 @@ function generateOrderEmail({ order, total }) {
 // create a transport for nodemailer
 const transporter = nodemailer.createTransport({
   host: process.env.MAIL_HOST,
-  port: 25,
+  port: 587,
   auth: {
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASS,
@@ -39,7 +39,7 @@ function wait(ms = 0) {
 }
 
 exports.handler = async (event, context) => {
-  // await wait(5000);
+  await wait(5000);
   const body = JSON.parse(event.body);
 
   if (body.mapleSyrup) {
@@ -75,7 +75,7 @@ exports.handler = async (event, context) => {
 
   // send the email
   const info = await transporter.sendMail({
-    from: "Slick's Slices <slick@example.com>",
+    from: "Slick's Slices <rohald_89@live.nl>",
     to: `${body.name} <${body.email}>, orders@example.com`,
     subject: 'New order!',
     html: generateOrderEmail({ order: body.order, total: body.total }),
