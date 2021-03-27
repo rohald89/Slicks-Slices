@@ -16,10 +16,11 @@ const MenuItemStyles = styled.div`
     margin: 0;
   }
   button {
+    width: 30%;
     font-size: 1.5rem;
   }
   button + button {
-    margin-left: 1rem;
+    margin-left: 0.4rem;
   }
   .remove {
     background: none;
@@ -30,6 +31,12 @@ const MenuItemStyles = styled.div`
     right: 0;
     box-shadow: none;
     line-height: 1rem;
+  }
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    button {
+      font-size: 1.2rem;
+    }
   }
 `;
 
