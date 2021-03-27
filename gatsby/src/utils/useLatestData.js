@@ -17,9 +17,9 @@ name
 
 export default function useLatestData() {
   // hot slices
-  const [hotSlices, setHotSlices] = useState([]);
+  const [hotSlices, setHotSlices] = useState();
   // slicemasters
-  const [slicemasters, setSlicemasters] = useState([]);
+  const [slicemasters, setSlicemasters] = useState();
   // use a side effect to fetch the data from the graphql end point
   useEffect(function () {
     // when component loads, load the data
