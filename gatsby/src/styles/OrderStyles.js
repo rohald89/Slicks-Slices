@@ -8,7 +8,8 @@ const OrderStyles = styled.form`
     grid-column: span 2;
     max-height: 600px;
     overflow: auto;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
     align-content: start;
     &.order,
