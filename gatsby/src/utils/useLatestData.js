@@ -1,5 +1,20 @@
 import { useEffect, useState } from 'react';
 
+// fake out VS code to get syntax highlighting on the query without importing GraphQL library
+// const gql = String.raw;
+const deets = `
+name
+            _id
+            image {
+              asset {
+                url
+                metadata {
+                  lqip
+                }
+              }
+            }
+`;
+
 export default function useLatestData() {
   // hot slices
   const [hotSlices, setHotSlices] = useState([]);
@@ -15,18 +30,18 @@ export default function useLatestData() {
       },
       body: JSON.stringify({
         query: `
-            query {
-                StoreSettings(id: "downtown"){
-                name
+          query {
+            StoreSettings(id: "downtown") {
+              name
               slicemaster {
-                name
+                ${deets}
               }
-              hotSlices{
-                name
+              hotSlices {
+                ${deets}
               }
-              }
+            }
           }
-            `,
+        `,
       }),
     }).then((res) =>
       res.json().then((res) => {
