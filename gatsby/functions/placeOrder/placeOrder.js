@@ -72,16 +72,16 @@ exports.handler = async (event, context) => {
       }),
     };
   }
+
   // send the email
   const info = await transporter.sendMail({
-    from: 'Slicks Slices <slick@example.com>',
+    from: "Slick's Slices <slick@example.com>",
     to: `${body.name} <${body.email}>, orders@example.com`,
-    subject: 'New Order!',
+    subject: 'New order!',
     html: generateOrderEmail({ order: body.order, total: body.total }),
   });
-  console.log(info);
   return {
     statusCode: 200,
-    body: JSON.stringify({ message: `Success!` }),
+    body: JSON.stringify({ message: 'Success' }),
   };
 };
