@@ -38,7 +38,7 @@ const SlicemasterStyles = styled.div`
   }
 `;
 
-const SlicemastersPage = ({ data, pageContext }) => {
+export default function SlicemastersPage({ data, pageContext }) {
   const slicemasters = data.slicemasters.nodes;
   return (
     <>
@@ -65,9 +65,7 @@ const SlicemastersPage = ({ data, pageContext }) => {
       </SlicemasterGrid>
     </>
   );
-};
-
-export default SlicemastersPage;
+}
 
 export const query = graphql`
   query($skip: Int = 0, $pageSize: Int = 2) {
