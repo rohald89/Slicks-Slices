@@ -2,9 +2,9 @@ import path, { resolve } from 'path';
 import fetch from 'isomorphic-fetch';
 
 async function turnPizzasIntoPages({ graphql, actions }) {
-  // 1. get a template for this page
+  // 1. Get a template for this page
   const pizzaTemplate = path.resolve('./src/templates/Pizza.js');
-  // 2. query all pizzas
+  // 2. Query all pizzas
   const { data } = await graphql(`
     query {
       pizzas: allSanityPizza {
@@ -17,10 +17,10 @@ async function turnPizzasIntoPages({ graphql, actions }) {
       }
     }
   `);
-  // 3. loop over each pizza and create a page for that pizza
+  // 3. Loop over each pizza and create a page for that pizza
   data.pizzas.nodes.forEach((pizza) => {
     actions.createPage({
-      // what is the url for this new page?
+      // What is the URL for this new page??
       path: `pizza/${pizza.slug.current}`,
       component: pizzaTemplate,
       context: {
@@ -31,9 +31,9 @@ async function turnPizzasIntoPages({ graphql, actions }) {
 }
 
 async function turnToppingsIntoPages({ graphql, actions }) {
-  // get template
-  const toppingsTemplate = path.resolve('./src/pages/pizzas.js');
-  // query all toppings
+  // 1. Get the template
+  const toppingTemplate = path.resolve('./src/pages/pizzas.js');
+  // 2. query all the toppings
   const { data } = await graphql(`
     query {
       toppings: allSanityTopping {
@@ -44,20 +44,19 @@ async function turnToppingsIntoPages({ graphql, actions }) {
       }
     }
   `);
-  // createPage for that topping
+  // 3. createPage for that topping
   data.toppings.nodes.forEach((topping) => {
-    console.log('CREATING PAGE FOR TOPPING');
     actions.createPage({
       path: `topping/${topping.name}`,
-      component: toppingsTemplate,
+      component: toppingTemplate,
       context: {
         topping: topping.name,
-        // TODO REGEX FOR TOPPING
+        // TODO Regex for Topping
         toppingRegex: `/${topping.name}/i`,
       },
     });
   });
-  // pass topping data to pizza.js
+  // 4. Pass topping data to pizza.js
 }
 
 async function fetchBeersAndTurnIntoNodes({
@@ -65,7 +64,7 @@ async function fetchBeersAndTurnIntoNodes({
   createNodeId,
   createContentDigest,
 }) {
-  // 1. Fetch a list of beers
+  // 1. Fetch a  list of beers
   const res = await fetch('https://api.sampleapis.com/beers/ale');
   const beers = await res.json();
   // 2. Loop over each one
@@ -76,7 +75,7 @@ async function fetchBeersAndTurnIntoNodes({
       parent: null,
       children: [],
       internal: {
-        type: `Beer`,
+        type: 'Beer',
         mediaType: 'application/json',
         contentDigest: createContentDigest(beer),
       },
@@ -145,13 +144,14 @@ export async function sourceNodes(params) {
 }
 
 export async function createPages(params) {
-  // create pages dynamically
-  // 1. pizzas
+  // Create pages dynamically
+  // Wait for all promises to be resolved before finishing this function
   await Promise.all([
     turnPizzasIntoPages(params),
     turnToppingsIntoPages(params),
     turnSlicemastersIntoPages(params),
   ]);
-  // 2. toppings
+  // 1. Pizzas
+  // 2. Toppings
   // 3. Slicemasters
 }
